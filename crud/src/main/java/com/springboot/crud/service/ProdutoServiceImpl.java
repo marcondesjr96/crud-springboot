@@ -22,12 +22,8 @@ public class ProdutoServiceImpl implements ProdutoService{
 
     @Override
     public ProdutoDTO buscarProduto(Long codigo) throws Exception {
-        Optional<Produto> produtoOpt = produtoRepository.findById(codigo);
-        if(!produtoOpt.isPresent()){
-            throw new Exception("Produto não encontrado!");
-        }
-
-        return ProdutoConvert.produtoDomainToDto(produtoOpt.get());
+        Produto produto = produtoRepository.findById(codigo).orElseThrow(() -> new Exception("Produto não encontrado!"));
+        return ProdutoConvert.produtoDomainToDto(produto);
     }
 
     @Override
@@ -56,25 +52,23 @@ public class ProdutoServiceImpl implements ProdutoService{
 
     @Override
     public ProdutoDTO atualizarProduto(Long codigo, ProdutoFormDTO produtoFormDTO) throws Exception {
-        Optional<Produto> produtoOpt = produtoRepository.findById(codigo);
-        if(!produtoOpt.isPresent()){
-            throw new Exception("Produto não encontrado");
-        }
-        Produto entity = produtoOpt.get();
-        entity.setNome(produtoFormDTO.getNome());
-        entity.setQuantidade(produtoFormDTO.getQuantidade());
-        entity.setValor(produtoFormDTO.getValor());
-        produtoRepository.save(entity);
-        return ProdutoConvert.produtoDomainToDto(entity);
+        Produto produto = produtoRepository.findById(codigo).orElseThrow(() -> new Exception("Produto não encontrado"));
+        setValues(produto, produtoFormDTO);
+        produtoRepository.save(produto);
+        return ProdutoConvert.produtoDomainToDto(produto);
+    }
+
+    private void setValues(Produto entity, ProdutoFormDTO produtoDTO){
+        entity.setNome(produtoDTO.getNome());
+        entity.setQuantidade(produtoDTO.getQuantidade());
+        entity.setValor(produtoDTO.getValor());
+
     }
 
     @Override
     public void deletarProduto(Long codigo) throws Exception {
-        Optional<Produto> produtoOpt = produtoRepository.findById(codigo);
-        if (!produtoOpt.isPresent()) {
-            throw new Exception("Agendamento não encontrado");
-        }
-        produtoRepository.delete(produtoOpt.get());
+        Produto produto = produtoRepository.findById(codigo).orElseThrow(() -> new Exception("Agendamento não encontrado"));
+        produtoRepository.delete(produto);
 
     }
 }
