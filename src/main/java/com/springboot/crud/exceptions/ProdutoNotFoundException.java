@@ -7,6 +7,6 @@ public class ProdutoNotFoundException extends ResponseStatusException {
 
 
     public ProdutoNotFoundException() {
-        super(HttpStatus.NOT_FOUND, "Produto não encontrado");
+        super(HttpStatus.NOT_FOUND, "Não contém produtos");
     }
 }
