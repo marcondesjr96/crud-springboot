@@ -11,7 +11,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="crud" target="17" />
-      <module name="crud-springboot" target="17" />
+      <module name="crud-springboot" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
