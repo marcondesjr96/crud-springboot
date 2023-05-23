@@ -15,7 +15,7 @@ O arquivo *application.yaml* contém a configuração do banco de dados, que pod
 spring:
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:payment-scheduler
+    url: jdbc:h2:mem:produtos
     username: admin
     password: admin
   h2:
