@@ -4,7 +4,7 @@ import com.springboot.crud.convert.ProductConvert;
 import com.springboot.crud.domain.Product;
 import com.springboot.crud.dto.ProductResponseDto;
 import com.springboot.crud.dto.ProductRequestDto;
-import com.springboot.crud.exceptions.ProductNotFoundException;
+import com.springboot.crud.exceptions.BadRequestException;
 import com.springboot.crud.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto retrieveProduct(Long code){
-        Product product = productRepository.findById(code).orElseThrow(ProductNotFoundException::new);
+        Product product = productRepository.findById(code).orElseThrow(BadRequestException::new);
         return ProductConvert.produtoDomainToDto(product);
     }
 
@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductResponseDto> listProducts() {
         List<Product> productList = productRepository.findAll();
         if(productList.isEmpty()){
-            throw new ProductNotFoundException();
+            throw new BadRequestException();
         }
         List<ProductResponseDto> dtoList = new ArrayList<>();
         for(Product product : productList){
@@ -49,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductResponseDto updateProduct(Long code, ProductRequestDto productRequestDto) {
-        Product product = productRepository.findById(code).orElseThrow(ProductNotFoundException::new);
+        Product product = productRepository.findById(code).orElseThrow(BadRequestException::new);
         setValues(product, productRequestDto);
         productRepository.save(product);
         return ProductConvert.produtoDomainToDto(product);
@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Long code){
-        Product product = productRepository.findById(code).orElseThrow(ProductNotFoundException::new);
+        Product product = productRepository.findById(code).orElseThrow(BadRequestException::new);
         productRepository.delete(product);
 
     }

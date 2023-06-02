@@ -3,10 +3,10 @@ package com.springboot.crud.exceptions;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-public class NotFoundException extends ResponseStatusException {
+public class BadRequestException extends ResponseStatusException {
 
 
-    public NotFoundException() {
-        super(HttpStatus.NOT_FOUND, "Contains no products!");
+    public BadRequestException() {
+        super(HttpStatus.BAD_REQUEST, "Contains no products!");
     }
 }
