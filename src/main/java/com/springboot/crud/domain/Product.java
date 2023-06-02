@@ -15,31 +15,31 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Produto {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long codigo;
+    private Long code;
 
     @Column(nullable = false)
-    private String nome;
+    private String name;
 
     @Column(nullable = false)
-    private double valor;
+    private double price;
 
     @Column(nullable = false)
-    private String categoria;
+    private String category;
 
     @Column(nullable = false)
-    private String fornecedor;
+    private String supplier;
 
     @Column(nullable = false)
-    private LocalDateTime criadoEm;
+    private LocalDateTime createdIn;
 
     @Column(nullable = false)
-    private String descricao;
+    private String description;
 
     @Column(nullable = false)
-    private int quantidade;
+    private int stock;
 
 }

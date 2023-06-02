@@ -11,12 +11,12 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProdutoDTO implements Serializable {
+public class ProductResponseDto implements Serializable {
 
-    private String nome;
-    private double valor;
-    private String categoria;
-    private int quantidade;
-    private String descricao;
+    private String name;
+    private double price;
+    private String category;
+    private int stock;
+    private String description;
 
 }

@@ -12,14 +12,14 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProdutoFormDTO implements Serializable {
+public class ProductRequestDto implements Serializable {
 
-    private String nome;
-    private double valor;
-    private int quantidade;
-    private String categoria;
-    private String fornecedor;
-    private String descricao;
-    private LocalDateTime criadoEm;
+    private String name;
+    private double price;
+    private int stock;
+    private String category;
+    private String supplier;
+    private String description;
+    private LocalDateTime createdIn;
 
 }

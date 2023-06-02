@@ -1,6 +1,6 @@
 package com.springboot.crud.repository;
 
-import com.springboot.crud.domain.Produto;
+import com.springboot.crud.domain.Product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,54 +16,54 @@ import java.util.Optional;
 class ProdutoRepositoryTest {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProductRepository produtoRepository;
 
     @Test
     void save_PersistProduto(){
-        Produto produtoToBeSaved = createProduto();
-        Produto produtoSaved = produtoRepository.save(produtoToBeSaved);
+        Product produtoToBeSaved = createProduto();
+        Product produtoSaved = produtoRepository.save(produtoToBeSaved);
 
         Assertions.assertThat(produtoSaved).isNotNull();
-        Assertions.assertThat(produtoSaved.getCodigo()).isNotNull();
-        Assertions.assertThat(produtoSaved.getNome()).isEqualTo(produtoToBeSaved.getNome());
-        Assertions.assertThat(produtoSaved.getDescricao()).isEqualTo(produtoToBeSaved.getDescricao());
-        Assertions.assertThat(produtoSaved.getValor()).isEqualTo(produtoToBeSaved.getValor());
-        Assertions.assertThat(produtoSaved.getQuantidade()).isEqualTo(produtoToBeSaved.getQuantidade());
-        Assertions.assertThat(produtoSaved.getCategoria()).isEqualTo(produtoToBeSaved.getCategoria());
-        Assertions.assertThat(produtoSaved.getFornecedor()).isEqualTo(produtoToBeSaved.getFornecedor());
+        Assertions.assertThat(produtoSaved.getCode()).isNotNull();
+        Assertions.assertThat(produtoSaved.getName()).isEqualTo(produtoToBeSaved.getName());
+        Assertions.assertThat(produtoSaved.getDescription()).isEqualTo(produtoToBeSaved.getDescription());
+        Assertions.assertThat(produtoSaved.getPrice()).isEqualTo(produtoToBeSaved.getPrice());
+        Assertions.assertThat(produtoSaved.getStock()).isEqualTo(produtoToBeSaved.getStock());
+        Assertions.assertThat(produtoSaved.getCategory()).isEqualTo(produtoToBeSaved.getCategory());
+        Assertions.assertThat(produtoSaved.getSupplier()).isEqualTo(produtoToBeSaved.getSupplier());
         Assertions.assertThat(produtoSaved.getCriadoEm()).isEqualTo(produtoToBeSaved.getCriadoEm());
 
     }
 
     @Test
     void save_UpdateProduto(){
-        Produto produtoToBeSaved = createProduto();
-        Produto produtoSaved = produtoRepository.save(produtoToBeSaved);
+        Product produtoToBeSaved = createProduto();
+        Product produtoSaved = produtoRepository.save(produtoToBeSaved);
 
-        produtoSaved.setNome("Smartphone");
+        produtoSaved.setName("Smartphone");
 
-        Produto produtoUpdated = this.produtoRepository.save(produtoSaved);
+        Product produtoUpdated = this.produtoRepository.save(produtoSaved);
 
         Assertions.assertThat(produtoUpdated).isNotNull();
-        Assertions.assertThat(produtoUpdated.getCodigo()).isNotNull();
-        Assertions.assertThat(produtoUpdated.getNome()).isEqualTo(produtoToBeSaved.getNome());
-        Assertions.assertThat(produtoUpdated.getDescricao()).isEqualTo(produtoToBeSaved.getDescricao());
-        Assertions.assertThat(produtoUpdated.getValor()).isEqualTo(produtoToBeSaved.getValor());
-        Assertions.assertThat(produtoUpdated.getQuantidade()).isEqualTo(produtoToBeSaved.getQuantidade());
-        Assertions.assertThat(produtoUpdated.getCategoria()).isEqualTo(produtoToBeSaved.getCategoria());
-        Assertions.assertThat(produtoUpdated.getFornecedor()).isEqualTo(produtoToBeSaved.getFornecedor());
-        Assertions.assertThat(produtoUpdated.getCriadoEm()).isEqualTo(produtoToBeSaved.getCriadoEm());
+        Assertions.assertThat(produtoUpdated.getCode()).isNotNull();
+        Assertions.assertThat(produtoUpdated.getName()).isEqualTo(produtoToBeSaved.getName());
+        Assertions.assertThat(produtoUpdated.getDescription()).isEqualTo(produtoToBeSaved.getDescription());
+        Assertions.assertThat(produtoUpdated.getPrice()).isEqualTo(produtoToBeSaved.getPrice());
+        Assertions.assertThat(produtoUpdated.getStock()).isEqualTo(produtoToBeSaved.getStock());
+        Assertions.assertThat(produtoUpdated.getCategory()).isEqualTo(produtoToBeSaved.getCategory());
+        Assertions.assertThat(produtoUpdated.getSupplier()).isEqualTo(produtoToBeSaved.getSupplier());
+        Assertions.assertThat(produtoUpdated.getCreatedIn()).isEqualTo(produtoToBeSaved.getCreatedIn());
 
     }
 
     @Test
     void delete_RemovesProduto(){
-        Produto produtoToBeSaved = createProduto();
-        Produto produtoSaved = produtoRepository.save(produtoToBeSaved);
+        Product produtoToBeSaved = createProduto();
+        Product produtoSaved = produtoRepository.save(produtoToBeSaved);
 
         this.produtoRepository.delete(produtoSaved);
 
-        Optional<Produto> produtoOptional = this.produtoRepository.findById(produtoSaved.getCodigo());
+        Optional<Product> produtoOptional = this.produtoRepository.findById(produtoSaved.getCode());
 
         Assertions.assertThat(produtoOptional).isEmpty();
 
@@ -72,10 +72,10 @@ class ProdutoRepositoryTest {
     @Test
     void findAll_ReturnListOfProdutos(){
 
-        Produto produtoToBeSaved = createProduto();
-        Produto produtoSaved = produtoRepository.save(produtoToBeSaved);
+        Product produtoToBeSaved = createProduto();
+        Product produtoSaved = produtoRepository.save(produtoToBeSaved);
 
-        List<Produto> produtoList = produtoRepository.findAll();
+        List<Product> produtoList = produtoRepository.findAll();
 
         Assertions.assertThat(produtoList).isNotEmpty();
 
@@ -85,23 +85,23 @@ class ProdutoRepositoryTest {
 
     @Test
     void findById_ReturnNotFound(){
-        Produto produtoToBeSaved = createProduto();
+        Product produtoToBeSaved = createProduto();
 
-        Optional<Produto> produtoOptional = produtoRepository.findById(0L);
+        Optional<Product> produtoOptional = produtoRepository.findById(0L);
 
         Assertions.assertThat(produtoOptional).isEmpty();
 
 
     }
-    private Produto createProduto(){
-        return Produto.builder()
-                .nome("Celular")
-                .valor(150.00)
-                .quantidade(2)
+    private Product createProduto(){
+        return Product.builder()
+                .name("Celular")
+                .price(150.00)
+                .stock(2)
                 .criadoEm(LocalDateTime.now())
                 .descricao("Lorem")
-                .fornecedor("Sicrano")
-                .categoria("Eletronico")
+                .supplier("Sicrano")
+                .category("Eletronico")
                 .build();
     }
 
