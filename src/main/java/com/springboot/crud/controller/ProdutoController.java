@@ -18,11 +18,11 @@ public class ProdutoController {
 
     public final ProdutoService produtoService;
     @GetMapping("/{id}")
-    public ProdutoDTO buscarProduto(@PathVariable("id") Long codigo) throws Exception {
+    public ProdutoDTO buscarProduto(@PathVariable("id") Long codigo) {
         return produtoService.buscarProduto(codigo);
     }
     @GetMapping("/produtos")
-    public List<ProdutoDTO> listarProdutos() throws Exception {
+    public List<ProdutoDTO> listarProdutos(){
         return produtoService.listarProdutos();
     }
     @PostMapping

@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ProdutoService {
 
-    ProdutoDTO buscarProduto (Long codigo) throws Exception;
+    ProdutoDTO buscarProduto (Long codigo);
 
-    List<ProdutoDTO> listarProdutos () throws Exception;
+    List<ProdutoDTO> listarProdutos ();
 
     ProdutoDTO criarProduto (ProdutoFormDTO produtoFormDTO);
 

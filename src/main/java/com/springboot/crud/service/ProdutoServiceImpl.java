@@ -20,13 +20,13 @@ public class ProdutoServiceImpl implements ProdutoService{
 
 
     @Override
-    public ProdutoDTO buscarProduto(Long codigo) throws Exception {
-        Produto produto = produtoRepository.findById(codigo).orElseThrow(() -> new ProdutoNotFoundException());
+    public ProdutoDTO buscarProduto(Long codigo){
+        Produto produto = produtoRepository.findById(codigo).orElseThrow(ProdutoNotFoundException::new);
         return ProdutoConvert.produtoDomainToDto(produto);
     }
 
     @Override
-    public List<ProdutoDTO> listarProdutos() throws Exception {
+    public List<ProdutoDTO> listarProdutos() {
         List<Produto> produtos = produtoRepository.findAll();
         if(produtos.isEmpty()){
             throw new ProdutoNotFoundException();
@@ -48,23 +48,27 @@ public class ProdutoServiceImpl implements ProdutoService{
     }
 
     @Override
-    public ProdutoDTO atualizarProduto(Long codigo, ProdutoFormDTO produtoFormDTO) throws Exception {
-        Produto produto = produtoRepository.findById(codigo).orElseThrow(() -> new ProdutoNotFoundException());
+    public ProdutoDTO atualizarProduto(Long codigo, ProdutoFormDTO produtoFormDTO) {
+        Produto produto = produtoRepository.findById(codigo).orElseThrow(ProdutoNotFoundException::new);
         setValues(produto, produtoFormDTO);
         produtoRepository.save(produto);
         return ProdutoConvert.produtoDomainToDto(produto);
     }
 
     private void setValues(Produto entity, ProdutoFormDTO produtoDTO){
+
         entity.setNome(produtoDTO.getNome() == null ? entity.getNome() : produtoDTO.getNome());
         entity.setQuantidade(produtoDTO.getQuantidade() < 0  ? entity.getQuantidade() : produtoDTO.getQuantidade());
         entity.setValor(produtoDTO.getValor() < 0 ? entity.getValor() : produtoDTO.getValor());
+        entity.setCategoria(produtoDTO.getCategoria() == null ? entity.getCategoria() : produtoDTO.getCategoria());
+        entity.setDescricao(produtoDTO.getDescricao() == null ? entity.getDescricao() : produtoDTO.getDescricao());
+        entity.setFornecedor(produtoDTO.getFornecedor() == null ? entity.getFornecedor() : produtoDTO.getFornecedor());
 
     }
 
     @Override
-    public void deletarProduto(Long codigo) throws Exception {
-        Produto produto = produtoRepository.findById(codigo).orElseThrow(() -> new ProdutoNotFoundException());
+    public void deletarProduto(Long codigo){
+        Produto produto = produtoRepository.findById(codigo).orElseThrow(ProdutoNotFoundException::new);
         produtoRepository.delete(produto);
 
     }
