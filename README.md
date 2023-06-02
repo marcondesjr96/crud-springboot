@@ -38,11 +38,13 @@ Para a comunicação entre a camada de controle e a camada de persistência, foi
 ## Funcionalidades
 As funcionalidades do projeto são:
 
-Busca de um produto por id
-Busca de todos os produtos
-Adição de um novo produto
-Edição de um produto existente
+Busca de um produto por id,
+Busca de todos os produtos,
+Adição de um novo produto,
+Edição de um produto existente,
 Exclusão de um produto existente
+
+(Trabalhando para adicionar mais...)
 
 
 ## Execução do Projeto
