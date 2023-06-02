@@ -15,4 +15,8 @@ public class ProdutoDTO implements Serializable {
 
     private String nome;
     private double valor;
+    private String categoria;
+    private int quantidade;
+    private String descricao;
+
 }

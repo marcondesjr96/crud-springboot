@@ -56,9 +56,9 @@ public class ProdutoServiceImpl implements ProdutoService{
     }
 
     private void setValues(Produto entity, ProdutoFormDTO produtoDTO){
-        entity.setNome(produtoDTO.getNome());
-        entity.setQuantidade(produtoDTO.getQuantidade());
-        entity.setValor(produtoDTO.getValor());
+        entity.setNome(produtoDTO.getNome() == null ? entity.getNome() : produtoDTO.getNome());
+        entity.setQuantidade(produtoDTO.getQuantidade() < 0  ? entity.getQuantidade() : produtoDTO.getQuantidade());
+        entity.setValor(produtoDTO.getValor() < 0 ? entity.getValor() : produtoDTO.getValor());
 
     }
 
