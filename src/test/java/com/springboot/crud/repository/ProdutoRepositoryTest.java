@@ -31,7 +31,7 @@ class ProdutoRepositoryTest {
         Assertions.assertThat(produtoSaved.getStock()).isEqualTo(produtoToBeSaved.getStock());
         Assertions.assertThat(produtoSaved.getCategory()).isEqualTo(produtoToBeSaved.getCategory());
         Assertions.assertThat(produtoSaved.getSupplier()).isEqualTo(produtoToBeSaved.getSupplier());
-        Assertions.assertThat(produtoSaved.getCriadoEm()).isEqualTo(produtoToBeSaved.getCriadoEm());
+        Assertions.assertThat(produtoSaved.getCreatedIn()).isEqualTo(produtoToBeSaved.getCreatedIn());
 
     }
 
@@ -98,8 +98,8 @@ class ProdutoRepositoryTest {
                 .name("Celular")
                 .price(150.00)
                 .stock(2)
-                .criadoEm(LocalDateTime.now())
-                .descricao("Lorem")
+                .createdIn(LocalDateTime.now())
+                .description("Lorem")
                 .supplier("Sicrano")
                 .category("Eletronico")
                 .build();
