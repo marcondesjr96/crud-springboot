@@ -1,6 +1,6 @@
 # Projeto de CRUD de produtos com Springboot
 
-Este projeto tem como objetivo criar um CRUD (Create, Read, Update e Delete) de produtos utilizando o framework Springboot e as dependências spring-boot-starter-web, spring-boot-starter-data-jpa, spring-boot-devtools, lombok e h2.
+Este projeto tem como objetivo criar um CRUD (Create, Read, Update e Delete) de produtos utilizando o framework Springboot e as dependências spring-boot-starter-web, spring-boot-starter-data-jpa, spring-boot-devtools, lombok, h2, model-mapper e swagger.
 
 ## Configuração do Banco de Dados
 Foi utilizado o banco de dados H2, que é um banco de dados em memória. Para acessar o console do banco de dados, utilize o caminho /h2-console na URL do projeto. As credenciais para acesso ao banco de dados são:
@@ -38,11 +38,17 @@ Para a comunicação entre a camada de controle e a camada de persistência, foi
 ## Funcionalidades
 As funcionalidades do projeto são:
 
-Busca de um produto por id,
-Busca de todos os produtos,
-Adição de um novo produto,
-Edição de um produto existente,
-Exclusão de um produto existente
+- Busca de um produto por id
+- Busca de todos os produtos
+- Busca de um fornecedor por id
+- Busca de todos os fornecedores
+- Adição de um novo produto junto com o fornecedor(caso não exista o fornecedor, ele cria)
+- Adição de um novo fornecedor junto com a lista de produtos
+- Adição de um novo fornecedor sem lista de produtos
+- Edição de um produto existente
+- Edição de um fornecedor existente
+- Exclusão de um fornecedor existente
+- Exclusão de um produto existente
 
 (Trabalhando para adicionar mais...)
 
