@@ -2,24 +2,22 @@ package com.springboot.crud.domain;
 
 import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
-@Data
-@Entity
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long code;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -30,8 +28,9 @@ public class Product {
     @Column(nullable = false)
     private String category;
 
-    @Column(nullable = false)
-    private String supplier;
+    @ManyToOne
+    @JoinColumn(name = "supplier_id", nullable = false)
+    private Supplier supplier;
 
     @Column(nullable = false)
     private LocalDateTime createdIn;

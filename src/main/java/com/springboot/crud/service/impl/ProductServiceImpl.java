@@ -1,13 +1,25 @@
-package com.springboot.crud.service;
+package com.springboot.crud.service.impl;
 
 import com.springboot.crud.convert.ProductConvert;
+import com.springboot.crud.convert.SupplierConvert;
 import com.springboot.crud.domain.Product;
-import com.springboot.crud.dto.ProductResponseDto;
-import com.springboot.crud.dto.ProductRequestDto;
+import com.springboot.crud.domain.Supplier;
+import com.springboot.crud.dto.request.product.ProductNoSupplierNewRequestDto;
+import com.springboot.crud.dto.request.supplier.SupplierNewRequestDto;
+import com.springboot.crud.dto.request.supplier.SupplierNoListProductNewRequestDto;
+import com.springboot.crud.dto.response.product.ProductResponseDto;
+import com.springboot.crud.dto.request.product.ProductNewRequestDto;
 import com.springboot.crud.exceptions.BadRequestException;
 import com.springboot.crud.repository.ProductRepository;
+import com.springboot.crud.repository.SupplierRepository;
+import com.springboot.crud.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
+
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +29,7 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
 
     public final ProductRepository productRepository;
+    public final SupplierRepository supplierRepository;
 
 
     @Override
@@ -33,36 +46,58 @@ public class ProductServiceImpl implements ProductService {
         }
         List<ProductResponseDto> dtoList = new ArrayList<>();
         for(Product product : productList){
-            ProductResponseDto productResponseDto = ProductConvert.produtoDomainToDto(product);
-            dtoList.add(productResponseDto);
+            dtoList.add(ProductConvert.produtoDomainToDto(product));
         }
         return dtoList;
     }
 
     @Override
-    public ProductResponseDto createProduct(ProductRequestDto productRequestDto) {
+    @Transactional
+    public ProductResponseDto createProduct(ProductNewRequestDto productRequestDto) {
         Product product = ProductConvert.produtoDtoToDomain(productRequestDto);
+        setSupplier(productRequestDto, product);
         productRepository.save(product);
         return ProductConvert.produtoDomainToDto(product);
+    }
 
+    private void setSupplier(ProductNewRequestDto productRequestDto, Product product) {
+        Supplier supplier = supplierRepository.findByCnpj(productRequestDto.getSupplier().getCnpj());
+        if(ObjectUtils.isEmpty(supplier)){
+            supplierRepository.save(product.getSupplier());
+        }else{
+            product.getSupplier().setId(supplier.getId());
+        }
     }
 
     @Override
-    public ProductResponseDto updateProduct(Long code, ProductRequestDto productRequestDto) {
+    @Transactional
+    public void createListProduct(List<ProductNoSupplierNewRequestDto> products, Supplier supplier) {
+        List<Product> productList = new ArrayList<>();
+
+        for (ProductNoSupplierNewRequestDto product : products) {
+            Product productEntity = ProductConvert.produtoNoSupplierDtoToDomain(product);
+            productEntity.getSupplier().setId(supplier.getId());
+            productList.add(productEntity);
+        }
+        productRepository.saveAll(productList);
+    }
+
+    @Override
+    public ProductResponseDto updateProduct(Long code, ProductNewRequestDto productRequestDto) {
         Product product = productRepository.findById(code).orElseThrow(BadRequestException::new);
         setValues(product, productRequestDto);
         productRepository.save(product);
         return ProductConvert.produtoDomainToDto(product);
     }
 
-    private void setValues(Product entity, ProductRequestDto dto){
+    private void setValues(Product entity, ProductNewRequestDto dto){
 
         entity.setName(dto.getName() == null ? entity.getName() : dto.getName());
         entity.setStock(dto.getStock() < 0  ? entity.getStock() : dto.getStock());
         entity.setPrice(dto.getPrice() < 0 ? entity.getPrice() : dto.getPrice());
         entity.setCategory(dto.getCategory() == null ? entity.getCategory() : dto.getCategory());
         entity.setDescription(dto.getDescription() == null ? entity.getDescription() : dto.getDescription());
-        entity.setSupplier(dto.getSupplier() == null ? entity.getSupplier() : dto.getSupplier());
+        //entity.setSupplier(dto.getSupplier() == null ? entity.getSupplier() : SupplierConvert.supplierDtoToEntity(dto.getSupplier()));
 
     }
 

@@ -24,7 +24,7 @@ class ProdutoRepositoryTest {
         Product produtoSaved = produtoRepository.save(produtoToBeSaved);
 
         Assertions.assertThat(produtoSaved).isNotNull();
-        Assertions.assertThat(produtoSaved.getCode()).isNotNull();
+        Assertions.assertThat(produtoSaved.getId()).isNotNull();
         Assertions.assertThat(produtoSaved.getName()).isEqualTo(produtoToBeSaved.getName());
         Assertions.assertThat(produtoSaved.getDescription()).isEqualTo(produtoToBeSaved.getDescription());
         Assertions.assertThat(produtoSaved.getPrice()).isEqualTo(produtoToBeSaved.getPrice());
@@ -45,7 +45,7 @@ class ProdutoRepositoryTest {
         Product produtoUpdated = this.produtoRepository.save(produtoSaved);
 
         Assertions.assertThat(produtoUpdated).isNotNull();
-        Assertions.assertThat(produtoUpdated.getCode()).isNotNull();
+        Assertions.assertThat(produtoUpdated.getId()).isNotNull();
         Assertions.assertThat(produtoUpdated.getName()).isEqualTo(produtoToBeSaved.getName());
         Assertions.assertThat(produtoUpdated.getDescription()).isEqualTo(produtoToBeSaved.getDescription());
         Assertions.assertThat(produtoUpdated.getPrice()).isEqualTo(produtoToBeSaved.getPrice());
@@ -63,7 +63,7 @@ class ProdutoRepositoryTest {
 
         this.produtoRepository.delete(produtoSaved);
 
-        Optional<Product> produtoOptional = this.produtoRepository.findById(produtoSaved.getCode());
+        Optional<Product> produtoOptional = this.produtoRepository.findById(produtoSaved.getId());
 
         Assertions.assertThat(produtoOptional).isEmpty();
 

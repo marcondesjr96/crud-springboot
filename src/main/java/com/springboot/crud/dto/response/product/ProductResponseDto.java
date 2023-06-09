@@ -1,4 +1,4 @@
-package com.springboot.crud.dto.response;
+package com.springboot.crud.dto.response.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
