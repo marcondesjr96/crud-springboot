@@ -1,5 +1,6 @@
 package com.springboot.crud.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.springboot.crud.dto.request.product.ProductNewRequestDto;
 import lombok.*;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Supplier {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,8 +31,8 @@ public class Supplier {
     @Column(nullable = false)
     private String contact;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
+    @JsonBackReference
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> productList;
 
 

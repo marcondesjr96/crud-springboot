@@ -19,7 +19,6 @@ public class ProductConvert {
                 .category(productDto.getCategory())
                 .supplier(supplierDtoToEntityNoList(productDto.getSupplier()))
                 .description(productDto.getDescription())
-                .createdIn(LocalDateTime.now())
                 .build();
     }
 
@@ -30,7 +29,6 @@ public class ProductConvert {
                 .stock(productDto.getStock())
                 .category(productDto.getCategory())
                 .description(productDto.getDescription())
-                .createdIn(LocalDateTime.now())
                 .build();
     }
 

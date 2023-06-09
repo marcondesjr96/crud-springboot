@@ -33,9 +33,6 @@ public class Product {
     private Supplier supplier;
 
     @Column(nullable = false)
-    private LocalDateTime createdIn;
-
-    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)

@@ -76,7 +76,6 @@ public class ProductServiceImpl implements ProductService {
 
         for (ProductNoSupplierNewRequestDto product : products) {
             Product productEntity = ProductConvert.produtoNoSupplierDtoToDomain(product);
-            productEntity.getSupplier().setId(supplier.getId());
             productList.add(productEntity);
         }
         productRepository.saveAll(productList);
@@ -97,7 +96,7 @@ public class ProductServiceImpl implements ProductService {
         entity.setPrice(dto.getPrice() < 0 ? entity.getPrice() : dto.getPrice());
         entity.setCategory(dto.getCategory() == null ? entity.getCategory() : dto.getCategory());
         entity.setDescription(dto.getDescription() == null ? entity.getDescription() : dto.getDescription());
-        //entity.setSupplier(dto.getSupplier() == null ? entity.getSupplier() : SupplierConvert.supplierDtoToEntity(dto.getSupplier()));
+
 
     }
 

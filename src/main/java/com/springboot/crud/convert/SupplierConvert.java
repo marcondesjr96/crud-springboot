@@ -2,10 +2,9 @@ package com.springboot.crud.convert;
 
 import com.springboot.crud.domain.Product;
 import com.springboot.crud.domain.Supplier;
-import com.springboot.crud.dto.request.product.ProductNewRequestDto;
-import com.springboot.crud.dto.request.product.ProductNoSupplierNewRequestDto;
 import com.springboot.crud.dto.request.supplier.SupplierNewRequestDto;
 import com.springboot.crud.dto.request.supplier.SupplierNoListProductNewRequestDto;
+import com.springboot.crud.dto.response.product.ProductResponseDto;
 import com.springboot.crud.dto.response.supplier.SupplierResponseDto;
 
 import java.util.ArrayList;
@@ -18,14 +17,13 @@ public class SupplierConvert {
                 .name(supplier.getName())
                 .address(supplier.getAddress())
                 .contact(supplier.getContact())
-                .productList(supplier.getProductList())
+                .productList(listProductToDto(supplier.getProductList()))
                 .build();
     }
 
     public static Supplier supplierDtoToEntity(SupplierNewRequestDto supplierRequestDto){
         return Supplier.builder()
                 .cnpj(supplierRequestDto.getCnpj())
-                .productList(listProductDtoToEntity(supplierRequestDto.getProductList()))
                 .name(supplierRequestDto.getName())
                 .contact(supplierRequestDto.getContact())
                 .address(supplierRequestDto.getAddress())
@@ -42,11 +40,11 @@ public class SupplierConvert {
     }
 
 
-    private static List<Product> listProductDtoToEntity(List<ProductNoSupplierNewRequestDto> productNewRequestDtos){
-        List<Product> productList = new ArrayList<>();
-        for (ProductNoSupplierNewRequestDto product : productNewRequestDtos){
-            Product productEntity = ProductConvert.produtoNoSupplierDtoToDomain(product);
-            productList.add(productEntity);
+    private static List<ProductResponseDto> listProductToDto(List<Product> products){
+        List<ProductResponseDto> productList = new ArrayList<>();
+        for (Product product : products){
+            ProductResponseDto productDto = ProductConvert.produtoDomainToDto(product);
+            productList.add(productDto);
         }
         return productList;
 
