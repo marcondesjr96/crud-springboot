@@ -1,7 +1,6 @@
 package com.springboot.crud.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.springboot.crud.dto.request.product.ProductNewRequestDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,14 +24,14 @@ public class Supplier {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cnpj;
 
     @Column(nullable = false)
     private String contact;
 
     @JsonBackReference
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Product> productList;
 
 

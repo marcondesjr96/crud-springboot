@@ -33,4 +33,12 @@ public class SupplierController {
     public SupplierResponseDto updateSupplier(@PathVariable("id") Long id, @RequestBody SupplierUpdateResquestDto dto){
         return supplierService.updateSupplier(id, dto);
     }
+
+    @DeleteMapping("/id/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSupplierById(@PathVariable("id") Long id){
+        supplierService.deleteSupplierById(id);
+    }
+
+
 }

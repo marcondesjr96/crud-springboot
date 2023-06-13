@@ -50,11 +50,19 @@ public class SupplierServiceImpl implements SupplierService {
         return SupplierConvert.supplierToResponseDto(supplier);
     }
 
+    @Override
+    public void deleteSupplierById(Long id) {
+        supplierRepository.deleteById(id);
+
+    }
+
     private static void setValues(SupplierUpdateResquestDto dto, Supplier supplier) {
         supplier.setName(dto.getName() == null ? supplier.getName() : dto.getName());
         supplier.setContact(dto.getContact() == null ? supplier.getContact() : dto.getContact());
         supplier.setAddress(dto.getAddress() == null ? supplier.getAddress() : dto.getAddress());
     }
+
+
 
 
 }

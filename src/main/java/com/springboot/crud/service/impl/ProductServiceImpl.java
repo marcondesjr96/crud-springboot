@@ -60,15 +60,6 @@ public class ProductServiceImpl implements ProductService {
         return ProductConvert.produtoDomainToDto(product);
     }
 
-    private void setSupplier(ProductNewRequestDto productRequestDto, Product product) {
-        Supplier supplier = supplierRepository.findByCnpj(productRequestDto.getSupplier().getCnpj());
-        if(ObjectUtils.isEmpty(supplier)){
-            supplierRepository.save(product.getSupplier());
-        }else{
-            product.getSupplier().setId(supplier.getId());
-        }
-    }
-
     @Override
     @Transactional
     public void createListProduct(List<ProductNoSupplierNewRequestDto> products, Supplier supplier) {
@@ -89,6 +80,22 @@ public class ProductServiceImpl implements ProductService {
         return ProductConvert.produtoDomainToDto(product);
     }
 
+    @Override
+    public void deleteProduct(Long code){
+        Product product = productRepository.findById(code).orElseThrow(BadRequestException::new);
+        productRepository.delete(product);
+
+    }
+
+    private void setSupplier(ProductNewRequestDto productRequestDto, Product product) {
+        Supplier supplier = supplierRepository.findByCnpj(productRequestDto.getSupplier().getCnpj());
+        if(ObjectUtils.isEmpty(supplier)){
+            supplierRepository.save(product.getSupplier());
+        }else{
+            product.getSupplier().setId(supplier.getId());
+        }
+    }
+
     private void setValues(Product entity, ProductNewRequestDto dto){
 
         entity.setName(dto.getName() == null ? entity.getName() : dto.getName());
@@ -97,13 +104,6 @@ public class ProductServiceImpl implements ProductService {
         entity.setCategory(dto.getCategory() == null ? entity.getCategory() : dto.getCategory());
         entity.setDescription(dto.getDescription() == null ? entity.getDescription() : dto.getDescription());
 
-
-    }
-
-    @Override
-    public void deleteProduct(Long code){
-        Product product = productRepository.findById(code).orElseThrow(BadRequestException::new);
-        productRepository.delete(product);
 
     }
 }
