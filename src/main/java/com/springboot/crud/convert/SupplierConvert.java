@@ -4,6 +4,7 @@ import com.springboot.crud.domain.Product;
 import com.springboot.crud.domain.Supplier;
 import com.springboot.crud.dto.request.supplier.SupplierNewRequestDto;
 import com.springboot.crud.dto.request.supplier.SupplierNoListProductNewRequestDto;
+import com.springboot.crud.dto.request.supplier.SupplierUpdateResquestDto;
 import com.springboot.crud.dto.response.product.ProductResponseDto;
 import com.springboot.crud.dto.response.supplier.SupplierResponseDto;
 

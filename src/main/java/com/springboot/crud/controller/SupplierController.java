@@ -1,6 +1,7 @@
 package com.springboot.crud.controller;
 
 import com.springboot.crud.dto.request.supplier.SupplierNewRequestDto;
+import com.springboot.crud.dto.request.supplier.SupplierUpdateResquestDto;
 import com.springboot.crud.dto.response.supplier.SupplierResponseDto;
 import com.springboot.crud.service.SupplierService;
 import lombok.RequiredArgsConstructor;
@@ -25,5 +26,11 @@ public class SupplierController {
     @ResponseStatus(HttpStatus.CREATED)
     public SupplierResponseDto createSupplier(@RequestBody SupplierNewRequestDto supplierRequestDto){
         return supplierService.createSupplier(supplierRequestDto);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public SupplierResponseDto updateSupplier(@PathVariable("id") Long id, @RequestBody SupplierUpdateResquestDto dto){
+        return supplierService.updateSupplier(id, dto);
     }
 }

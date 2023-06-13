@@ -3,6 +3,7 @@ package com.springboot.crud.service.impl;
 import com.springboot.crud.convert.SupplierConvert;
 import com.springboot.crud.domain.Supplier;
 import com.springboot.crud.dto.request.supplier.SupplierNewRequestDto;
+import com.springboot.crud.dto.request.supplier.SupplierUpdateResquestDto;
 import com.springboot.crud.dto.response.supplier.SupplierResponseDto;
 import com.springboot.crud.exceptions.BadRequestException;
 import com.springboot.crud.repository.SupplierRepository;
@@ -40,4 +41,20 @@ public class SupplierServiceImpl implements SupplierService {
         return SupplierConvert.supplierToResponseDto(supplier);
 
     }
+
+    @Override
+    public SupplierResponseDto updateSupplier(Long id, SupplierUpdateResquestDto dto) {
+        Supplier supplier = supplierRepository.findById(id).orElseThrow(BadRequestException::new);
+        setValues(dto, supplier);
+        supplierRepository.save(supplier);
+        return SupplierConvert.supplierToResponseDto(supplier);
+    }
+
+    private static void setValues(SupplierUpdateResquestDto dto, Supplier supplier) {
+        supplier.setName(dto.getName() == null ? supplier.getName() : dto.getName());
+        supplier.setContact(dto.getContact() == null ? supplier.getContact() : dto.getContact());
+        supplier.setAddress(dto.getAddress() == null ? supplier.getAddress() : dto.getAddress());
+    }
+
+
 }

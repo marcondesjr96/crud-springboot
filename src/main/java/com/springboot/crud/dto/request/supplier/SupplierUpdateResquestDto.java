@@ -12,20 +12,13 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierNewRequestDto implements Serializable {
+public class SupplierUpdateResquestDto implements Serializable {
 
-    @NotEmpty
+
     private String name;
 
-    @NotEmpty
     private String address;
 
-    @NotEmpty
-    private String cnpj;
-
-    @NotEmpty
     private String contact;
-
-    private List<ProductNoSupplierNewRequestDto> productList;
 
 }
