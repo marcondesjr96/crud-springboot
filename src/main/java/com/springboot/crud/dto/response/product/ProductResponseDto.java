@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDto {
+public class ProductResponseDto implements Serializable {
 
     private String name;
     private double price;

@@ -15,7 +15,8 @@ public interface ProductService {
 
     ProductResponseDto retrieveProduct(Long code);
 
-    ProductTableResponseDto getProductTableById(Long id);
+    List<ProductResponseDto> findByName(String name);
+
     PageDto<ProductResponseDto> listProducts(Pageable pageable);
 
     ProductResponseDto createProduct(ProductNewRequestDto productRequestDto);

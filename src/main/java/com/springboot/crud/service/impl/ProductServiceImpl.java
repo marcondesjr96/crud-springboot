@@ -40,9 +40,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductTableResponseDto getProductTableById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(BadRequestException::new);
-        return ProductConvert.toProductTableDto(product);
+    public List<ProductResponseDto> findByName(String name) {
+        List<Product> productList = productRepository.findByName(name);
+        List<ProductResponseDto> productDtoList = new ArrayList<>();
+        for(Product product : productList){
+            ProductResponseDto productResponseDto = ProductConvert.produtoDomainToDto(product);
+            productDtoList.add(productResponseDto);
+        }
+        return productDtoList;
+
     }
 
     @Override

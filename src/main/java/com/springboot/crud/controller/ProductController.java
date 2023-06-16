@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RequestMapping("/api/product")
 @CrossOrigin
@@ -21,6 +23,11 @@ public class ProductController {
     public ProductResponseDto retrieveProduct(@PathVariable("id") Long code) {
         return productService.retrieveProduct(code);
     }
+    @GetMapping("/name/{name}")
+    public List<ProductResponseDto> retrieveProductByName(@PathVariable("name") String name) {
+        return productService.findByName(name);
+    }
+
     @GetMapping("/all")
     public PageDto<ProductResponseDto> listProducts(Pageable pageable){
         return productService.listProducts(pageable);
