@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductNoSupplierNewRequestDto implements Serializable {
+public class ProductNoSupplierNewRequestDto{
 
 
     @NotEmpty

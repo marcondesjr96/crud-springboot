@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierUpdateResquestDto implements Serializable {
+public class SupplierUpdateResquestDto{
 
 
     private String name;

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierNoListProductNewRequestDto implements Serializable {
+public class SupplierNoListProductNewRequestDto{
 
     @NotEmpty
     private String name;

@@ -1,13 +1,13 @@
 package com.springboot.crud.controller;
 
-import com.springboot.crud.dto.response.product.ProductResponseDto;
 import com.springboot.crud.dto.request.product.ProductNewRequestDto;
+import com.springboot.crud.dto.response.PageDto;
+import com.springboot.crud.dto.response.product.ProductResponseDto;
 import com.springboot.crud.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RequestMapping("/api/product")
@@ -16,14 +16,14 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    public final ProductService productService;
+    private final ProductService productService;
     @GetMapping("/{id}")
     public ProductResponseDto retrieveProduct(@PathVariable("id") Long code) {
         return productService.retrieveProduct(code);
     }
     @GetMapping("/all")
-    public List<ProductResponseDto> listProducts(){
-        return productService.listProducts();
+    public PageDto<ProductResponseDto> listProducts(Pageable pageable){
+        return productService.listProducts(pageable);
     }
 
     @PostMapping

@@ -2,19 +2,17 @@ package com.springboot.crud.dto.response.supplier;
 
 import com.springboot.crud.domain.Product;
 import com.springboot.crud.dto.response.product.ProductResponseDto;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.List;
 
 @Builder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SupplierResponseDto implements Serializable {
+public class SupplierResponseDto{
 
     private String name;
     private String address;

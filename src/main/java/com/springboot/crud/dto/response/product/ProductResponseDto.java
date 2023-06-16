@@ -1,17 +1,15 @@
 package com.springboot.crud.dto.response.product;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Builder
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductResponseDto implements Serializable {
+public class ProductResponseDto {
 
     private String name;
     private double price;
